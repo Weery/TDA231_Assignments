@@ -30,10 +30,17 @@ Create_and_Save_ColorMap_Matrix(cov_y,'Covariance matrix, $\verb|cov(Y)|$','cov_
 corr_y = corr(Y);
 
 Create_and_Save_ColorMap_Matrix(corr_x,'Correlation matrix, $\verb|corr(Y)|$','corr_y');
+% 
+minY = min(corr_y);
+minY = min(minY);
 
-% Find the smallest correlations in Y
-min_corr_val = min(corr_y(:));
-eps = 1e-10; % values within this epsilon are considered equal
-[rows, columns]=find(abs(corr_y-min_corr_val) < eps);
-title_string = sprintf('Minimum correlation for feature combination $(%i,%i)$',columns(1),rows(1));
-Create_and_Save_ColorMap_Matrix_With_Scatter_Points(corr_x,title_string,'corr_y_scatter',[rows,columns]);
+fig5=figure(5)
+scatter(X(:,8),X(:,12))
+str = sprintf('Minimum correlation(%.4f) from the pair 8 and 12',minY)
+title(str, 'interpreter','latex','fontsize',16)
+xlabel('Feature 8', 'interpreter','latex', 'fontsize',16)
+ylabel('Feature 12','interpreter','latex','fontsize',16)
+file_string = sprintf('paper\\Figures\\plot2_2_%s.png','scatter');
+saveas(fig5,file_string)
+
+
