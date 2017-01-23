@@ -1,0 +1,15 @@
+function [] = Create_and_Save_ColorMapMatrix(mat, title_name, file_name)
+
+fig1=figure(1);
+imagesc(cov_x)
+h=colorbar;
+h.FontSize=10;
+h.TickLabelInterpreter='latex';
+
+title = sprintf('Covariance matrix, ');
+title('Covariance matrix, $\verb|cov(X)|$', 'interpreter','latex','fontsize',16)
+xlabel('Column, $c_x$', 'interpreter','latex', 'fontsize',16)
+ylabel('Row, $r_y$','interpreter','latex','fontsize',16)
+
+
+end

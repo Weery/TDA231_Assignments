@@ -1,0 +1,14 @@
+# Ignore pdf files, compile .tex document with local compiler
+*.pdf
+
+# Ignore temporary texmaker files
+*.aux
+*.bcf
+*.log
+*.out
+*.xml
+*.gz
+
+# Ignore temporary Matlab files
+*.asv
+*.fig

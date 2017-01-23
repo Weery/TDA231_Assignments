@@ -126,16 +126,70 @@ This means that the random variables $X$ and $Y$ are \textit{uncorrelated} which
 
 \subsection{Problem} % Problem 2.1
 
+We want to study the distribution of a 2D multivariate normal distribution with mean $\mu=\left[\begin{array}{rr} 1 \\ 1
+\end{array}\right]$ and covariance $\Sigma = \left[\begin{array}{rr} 0.1 &-0.05  \\ -0.05 & 0.2\end{array}\right]$.
+
+The levels of the logarithm of the distribution follows,
+
 \begin{equation}
+f(x;r):= \frac{(x-\mu)^{T}\Sigma^{-1}(x-\mu)}{2}-r
 \label{eq:multivarFunc}
 \end{equation}
 
+where $x$ is a random 2D vector and $r$ is the level. Solving the equation 
+
+\begin{equation}
+f(x;r) = 0,
+\end{equation} 
+
+for different values of $r$ yields level curves for this parameter which can be seen in Figures~\ref{fig:levelSet}. In the same figure we can see $1000$ randomly generated points using $\verb|mvnrnd(mu,Sigma,1000)|$ in \textsc{Matlab}, we separate the points lying outside the level curve $f(x;r)$ from those that are inside.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.65\textwidth]{plot2_1.png}
-	\caption{\label{fig:levelSet} Level set for the function given in Eq. \eqref{eq:multivarFunc}.}
+	\includegraphics[width=0.65\textwidth]{Figures/plot2_1.png}
+	\caption{\label{fig:levelSet} Level set for the function given in Eq. \eqref{eq:multivarFunc}, together with randomly placed points following a 2D multivariate normal distribution.}
 \end{figure}
 
 \subsection{Problem} % Problem 2.2
+
+The correlation and covariance matrices for $X$ are computed using the functions \verb|cov()| and \verb|corr()|. To scale each feature between 0 and 1 to make $Y$ each value is divided by the highest number in the data set. The correlation and covariance matrices for both $X$ and $Y$ are plotted and shown in Figures~\ref{fig:cov}. and~\ref{fig:corr}.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.40\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/plot2_2_cov_x.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.40\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/plot2_2_cov_y.png}
+    \end{subfigure}
+    \caption{\label{fig:cov} The covariance of two random variables shows their joint variability. If great values in one variable corresponds to great values in the other and the same is true for small values then the covariance tend to be large. The covariance also contains information of the variance of the variables, therefore there is no surprise that the downscaled matrix $Y$ contains much smaller elements.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.40\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/plot2_2_corr_x.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.40\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/plot2_2_corr_y.png}
+    \end{subfigure}
+    \caption{\label{fig:corr} The correlation of two variables is a measure of how much they correlate, ranging from $1$, positive correlated, to $-1$ negative correlation. It is no surprise that the original matrix $X$ has the same correlation matrix as the normalized matrix $Y$ since all the numbers are scaled in the same manner. }
+\end{figure}
+
+\noindent Both the covariance and correlation look identical for both $X$ and $Y$ when visualized. The correlation matrices are identical whereas the covariance matrices don't have the same numerical values but the ratio between values is the same. This was to be expected since $Y$ is just a scaled version of $X$.\\
+Lastly the pair with the minimum correlation are plotted. The pair is column 8 and 12. As seen in Figure~\ref{fig:scatter} there are two clear clusters, one where the data points are very close together and the other where the data points are sparsely distributed.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Figures/plot2_2_corr_y_scatter.png}
+    \caption{The pair of features with minimum correlation are $(8,12)$ marked in the figure. }
+    \label{fig:scatter}
+\end{figure}
+
+
 
 \end{document}
