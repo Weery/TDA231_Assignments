@@ -1,0 +1,141 @@
+\documentclass{article}
+
+\input{settings.tex}
+
+
+
+\begin{document}
+\selectlanguage{swedish}
+
+\input{title.tex}
+
+
+
+\section{Theoretical problems}
+
+\subsection{Problem} % Problem 1.1
+
+The probability that a random person are cancer positive is $P(C_+)=0.0001$ and thus the probability of being cancer negative is $P(C_-)=0.9999$. The testing of the disease is not $\unit[100]{\%}$ accurate and the probabiliy of actually getting a positive test given the patient being sick is $P(T_+|C_+)=0.99$ and conversely the probability of getting negative result when being healthy is $P(T_-|C_-)=0.99$. The definition of conditional probability is,
+
+\begin{equation}
+	P(A|B) \triangleq \frac{P(A\cap B)}{P(B)},
+\end{equation}
+
+so the risk of actually being sick given a positive result is,
+
+\begin{equation}
+	\begin{array}{rcl}
+		P(C_+|T_+)	& =				& \displaystyle\frac{P(C_+ \cap T_+)}{P(T_+)} \\
+					& \Rightarrow	& \\
+		P(C_+ \cap T_+) & =			& P(C_+|T_+)P(T_+),\\
+	\end{array}
+\end{equation}
+
+and similarly we can write, 
+
+\begin{equation}
+	P(C_+ \cap T_+) = P(T_+|C_+)P(C_+),
+\end{equation}
+
+and thus,
+
+\begin{equation}
+	\begin{array}{rcl}
+		P(T_+|C_+)P(C_+)	& =				& P(C_+|T_+)P(T_+)\\
+							& \Rightarrow	& \\
+		P(C_+|T_+)			& =				& \displaystyle\frac{P(T_+|C_+)P(C_+)}{P(T_+)}.
+	\end{array}
+\end{equation}
+
+We can also use that 
+
+\begin{equation}
+	\begin{array}{rcl}
+		P(T_+)	& =	& P(T_+|C_+)P(C_+)+P(T_+|C_-)P(C_-)\\
+				& =	& P(T_+|C_+)P(C_+)+(1-P(T_-|C_-))P(C_-)\\
+	\end{array}
+\end{equation}
+
+
+Inserting the given data we get,
+
+\begin{equation}
+	\begin{array}{rcl}
+		P(C_+|T_+)	& =			&\frac{0.99\cdot0.0001}{0.99\cdot0.0001+0.01\cdot0.9999} \\
+					& \approx	& 0.0098 \\
+	\end{array}
+\end{equation}
+
+\textbf{\textit{Answer:}} So the chance of actually being sick is only a mere $\unit[0.98]{\%}$.
+
+\subsection{Problem} % Problem 1.2
+
+The covariance of two random variables $X$ and $Y$ is defined as,
+
+\begin{equation}
+\label{eq:cov}
+	\begin{array}{cll}
+		Cov[X,Y]	&  \triangleq 	& E[(X-E[X])(Y-E[Y])] \\
+				 	& 	=			& E[XY] - E[X]E[Y]\\.
+	\end{array}
+\end{equation} 
+
+For our problem we have that $X$ is uniform on the interval $[-1,1]$ and $Y:=X^2$, so
+
+\begin{equation}
+	\begin{array}{rcl}
+		E[X]	& =	& \displaystyle\int_{-1}^{1}xp_X(x)dx \\
+		\left\{\begin{array}{rcl}
+			\displaystyle\int_{-1}^{1}p(x)_Xdx & = & 1 \\
+			\displaystyle\int_{-1}^{1}cdx 	& = & 1 \\
+			2c 					& = & 1 \\
+			c					& = & \frac{1}{2}\\					
+		\end{array}\right\}		& = & \frac{1}{2}\displaystyle\int_{-1}^{1}xdx \\
+				& = & \frac{1}{4}\left[x^2\right]^1_{-1} \\
+				& = & 0.\\ 
+	\end{array}
+\end{equation}
+
+Since $E[X]$ is zero we do not have to calculate the expectation of $Y$ since it disappears anyway, though, we need to calculate the expectation of the product,
+
+\begin{equation}
+	\begin{array}{rcl}
+		E[XY]	& =			& \displaystyle\int_{-1}^{1}xp_{XY}(x)dx\\
+		\left\{
+			\begin{array}{rcl}
+				p_{XY}(x) & \propto	& p_X^3(x) \\
+			\end{array}
+		\right\}	& \propto	& \displaystyle\int_{-1}^{1}xp_X^3(x)dx \\
+				& = 		& 0. \\
+	\end{array}
+\end{equation}
+
+If we insert this in Eq. \eqref{eq:cov} we get 
+
+\begin{equation}
+	\begin{array}{rcl}
+		Cov[X,Y]	& =	& 0-0\cdot E[Y]\\
+					& =	& 0
+	\end{array}
+\end{equation}
+
+This means that the random variables $X$ and $Y$ are \textit{uncorrelated} which does not imply $independence$ since the variables obviously are.
+
+\newpage 
+\section{Practical problems}
+
+\subsection{Problem} % Problem 2.1
+
+\begin{equation}
+\label{eq:multivarFunc}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\textwidth]{plot2_1.png}
+	\caption{\label{fig:levelSet} Level set for the function given in Eq. \eqref{eq:multivarFunc}.}
+\end{figure}
+
+\subsection{Problem} % Problem 2.2
+
+\end{document}
