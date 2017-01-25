@@ -12,7 +12,37 @@
 
 
 \section*{Problem 1}
+\subsection*{1.1}
+
+\begin{equation}
+L = p(x|\mu,\sigma^2I) = \prod_{n=1}^N \sim  {N}(x_n|\mu,\sigma^2I)
+\label{eq:likelihood}
+\end{equation}
+%\noindent To find the maximum likelihood the likelihood function has to be differentiated w.r.t $\sigma$. To make the derivation simpler the logarithm is taken to get the log likelihood function described in equation~\ref{eq:loglike}
+%\begin{equation}
+%log(L) = %Nlog(\frac{1}{2\pi^{}D/2}\frac{1}{|\sigma^2I|^{1/2}}) - %\frac{1}{2}\Sigma_{n=1}^N(x_n-\mu)^T(%\sigma^2I)^{-1}(x_n-\mu)
+%\label{eq:loglike}
+%\end{equation}
+
+
+\noindent Knowing that the distribuition is spherical the maxmimum likelihood estimator for $\sigma$ will be the same in all directions. Thus the log likelihood function can be represented as described in equation~\ref{eq:loglike}
+\begin{equation}
+log(L) =-\frac{1}{2\sigma^2}\Sigma_{n=1}^N(x_n-\mu)^2 - \frac{N}{2}log(\sigma^2) - \frac{N}{2}log(2\pi)
+\label{eq:loglike}
+\end{equation}
+and by differentiating equation~\ref{eq:loglike} w.r.t $\sigma$ equation~\ref{eq:diff} is aquired
+\begin{equation}
+	\frac{\delta log(L)}{\delta \sigma} = \frac{1}{\sigma^3}\Sigma_{n=1}^N(x_n-\mu)^2 - \frac{N}{\sigma}
+	\label{eq:diff}
+\end{equation}
+and solving equation~\ref{eq:diff} for zero the maximum likelihood is gathered and described in equation~\ref{eq:ML}
+\begin{equation}
+	\sigma_{ML}^2 = \frac{1}{N}\Sigma_{n=1}^N(x_n-\mu)^2 
+\end{equation}
+
 \newpage 
+
+
 
 \section*{Problem 2}
 
