@@ -19,7 +19,7 @@ legendIterator=1;
 for k=1:3
     h=[h plot_circle(mu,k*sigma)];
     inside= sum(inside_circle(x,mu,k*sigma));
-    s = sprintf('k: %i, $x_k$/$x$: %.4f',k,inside/size_X(2));
+    s = sprintf('k: %i, $x_k$/$x$: %.4f',k,inside/size_X(1));
     legendInfo{legendIterator} = [s];
     legendIterator = legendIterator +1;
 end

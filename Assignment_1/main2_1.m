@@ -13,7 +13,6 @@
 clear all, close all, clc
 
 % a)
-% TODO: write the mathematical expression for the MLE
 
 % b)
 % TODO: write sge.m
