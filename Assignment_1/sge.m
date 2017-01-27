@@ -12,17 +12,13 @@ function [mu, sigma] = sge(x)
 % mu    : Estimated mean of the dataset [mu_1 mu_2 ... mu_p] 
 % sigma : Estimated standard deviation of the dataset (number)                 
 %
-
-N = length(x);
+N=length(x);
 mu = mean(x);
 sigma = 0;
-for i = 1:N
-    sigma = (x(i,:)-mu).^2 + sigma;
+for i=1:N
+    sigma=(x(i,:)-mu)'*(x(i,:)-mu)+sigma;
 end
-sigma = sigma/N;
-sigma = mean(sigma);
 
-
-%sigma = mean(x'*x) - mu'*mu;
-%sigma = sigma(1,1);
+sigma = (sigma(1,1)+sigma(2,2))/2;
+sigma = sqrt(sigma/N);
 end

@@ -14,6 +14,12 @@
 \section*{Problem 1}
 \subsection*{1.1}
 
+TODO:
+Change to 
+\begin{equation}
+(x_i-\mu)^{T}(x_i-\mu)
+\end{equation}
+
 \begin{equation}
 L = p(x|\mu,\sigma^2I) = \prod_{i=1}^n \sim  {N}(x_i|\mu,\sigma^2I)
 \label{eq:likelihood}
@@ -53,6 +59,38 @@ as the second derivative,
 is negative at that point and the maximum is therefore found.
 
 \subsection*{1.2}
+
+\subsubsection*{a)}
+
+answer:
+\begin{equation}
+P(\sigma^2=s|\mu and stuff) \propto InverseGamma(\alpha+1, \beta + \sum(x-\mu)^{T}(x-\mu))
+\end{equation}
+
+\subsubsection*{b)}
+
+\begin{equation}
+B_{Factor}=\frac{P(\sigma^2=s|M_A)}{P(\sigma^2=s|M_B)}
+\end{equation}
+
+where
+\begin{equation}
+P(M_A|D)=\frac{P(D|M_A)P(M_A)}{P(D)}
+\end{equation}
+
+so that
+
+\begin{equation}
+B_{Factor} = \frac{P(M_A|D)P(M_B) }{P(M_B|D)P(M_A)}
+\end{equation}
+
+
+
+\subsubsection*{c)}
+
+\begin{equation}
+B_{Factor}=\frac{P(M_A|\sigma^2=\sigma_{ML}^2)}{P(M_B|\sigma^2=\sigma_{ML}^2)}
+\end{equation}
 
 \newpage 
 
