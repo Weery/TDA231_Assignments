@@ -100,16 +100,48 @@ Figure~\ref{fig:prob21} shows the plotted data and how the data lies within the 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.65\textwidth]{Figures/plot2_1_scatter.png}
-	\caption{\label{fig:prob21}}
+	\caption{\label{fig:prob21}The dataset plotted with three circles with radius $k\sigma$, where $k\in {1,2,3}$ and $\sigma$ is the standard deviation of the given data.}
 \end{figure}
 
 \subsection*{Problem 2.2}
 
-%\begin{figure}[H]
-%	\centering
-%	\subfigure[$\alpha=\beta=1$]{\includegraphics[width=0.65\textwidth]{Figures/plot2_2_a1.png}}\quad
-%	\subfigure[$\alpha=10 \beta=1$]{\includegrapchics[width=0.65 \textwidth]{Figures/plot2_2_a2.png}}
-%	\caption{\label{fig:distribuition}}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.65\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/plot2_2_a1.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/plot2_2_a2.png}
+    \end{subfigure}
+    \caption{\label{fig:distributions} The prior vs. posterior distribution using the given data for different hyperparameters $\alpha$ and $\beta$.}
+\end{figure}
+
+\begin{equation}
+\sigma^2_{MAP}=\frac{\beta+\sigma^2_{MLE}}{\alpha+2}
+\end{equation}
+
+where
+
+\begin{equation}
+\sigma^2_{MLE}=\frac{1}{2}\left(x-\mu\right)^{T}\left(x-\mu\right)
+\end{equation}
+
+
+so we get,
+
+\begin{equation}
+\begin{array}{rrcl}
+\alpha=1, \beta = 1 \Rightarrow & \sigma^2_{MAP} & = & 0.5292\\
+\alpha=10, \beta = 1 \Rightarrow & \sigma^2_{MAP} & = & 0.1323
+\end{array}
+\end{equation}
+
+\begin{equation}
+B_{factor}=\frac{\sigma^2_{MAP;1}}{\sigma^2_{MAP;2}}=4
+\end{equation}
+
+so we would prefer the model using $\alpha=1$ and $\beta=1$.
 
 \end{document}
