@@ -14,12 +14,7 @@
 \section*{Problem 1}
 \subsection*{1.1}
 
-TODO:
-Change to 
-\begin{equation}
-(x_i-\mu)^{T}(x_i-\mu)
-\end{equation}
-
+The likelihood function is described by equation~\ref{eq:likelihood}.
 \begin{equation}
 L = p(x|\mu,\sigma^2I) = \prod_{i=1}^n \sim  {N}(x_i|\mu,\sigma^2I)
 \label{eq:likelihood}
@@ -63,11 +58,13 @@ is negative at that point and the maximum is therefore found.
 \subsubsection*{a)}
 To derive the posterior distribution the probability distribution and the inverse-gamma prior distribution are multiplied. 
 
-$$ P(X =x|\sigma^2) P(\sigma^2=s|\alpha , \beta) = \frac{1}{2\pi \sigma^2} exp(-\frac{(x - \mu)^Tx-\mu}{2\sigma^2}) $$
- 
-answer:
+$$ P(X =x|\sigma^2) P(\sigma^2=s|\alpha , \beta) = \frac{1}{2\pi \sigma^2} exp(-\frac{(x - \mu)^Tx-\mu}{2\sigma^2})\cdot \frac{\beta^{\alpha}}{\Gamma(\alpha)}s^{-(\alpha+1)}exp(-\frac{\beta}{s}) $$
+\noindent By simplifying and taking together terms the posterior distribution looks like
+$$p(\sigma^2 = s|x_1,...,x_n;\alpha,\beta) = stuff check Victor's notes $$
+\noindent which is recognized as a gamma function, so the posterior distribution becomes
+%answer:
 \begin{equation}
-P(\sigma^2=s|\mu and stuff) \propto InverseGamma(\alpha+1, \beta + \sum(x-\mu)^{T}(x-\mu))
+p(\sigma^2=s|x_1,...,x_n;\alpha,\beta) \propto InverseGamma(\alpha+1, \beta + \sum(x-\mu)^{T}(x-\mu))
 \end{equation}
 
 \subsubsection*{b)}
