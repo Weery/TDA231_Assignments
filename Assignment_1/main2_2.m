@@ -22,11 +22,14 @@ posterior_distribution =@(s,alpha,beta) prior_distribution(s,alpha+1,beta+sqrt(s
 
 
 x_axis = 0:0.01:10;
-
+fig1 = figure(1)
 plot(x_axis,prior_distribution(x_axis,1,1))
 hold on
 plot(x_axis,posterior_distribution(x_axis,1,1))
-figure
+saveas(fig1,'./paper/Figures/plot2_2_a1.png')
+fig2 = figure(2)
 plot(x_axis,prior_distribution(x_axis,10,1))
 hold on
 plot(x_axis,posterior_distribution(x_axis,10,1))
+saveas(fig2,'./paper/Figures/plot2_2_a2.png')
+
