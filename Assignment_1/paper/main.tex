@@ -38,12 +38,12 @@ log(L) =-\frac{1}{2\sigma^2}\Sigma_{i=1}^n(x_i-\mu)^2 - \frac{n}{2}log(\sigma^2)
 \end{equation}
 and by differentiating equation~\ref{eq:loglike} w.r.t $\sigma$ equation~\ref{eq:diff} is aquired
 \begin{equation}
-	\frac{\delta log(L)}{\delta \sigma} = \frac{1}{\sigma^3}\Sigma_{i=1}^n(x_i-\mu)^2 - \frac{n}{\sigma}
+	\frac{\delta log(L)}{\delta \sigma} = \frac{1}{\sigma^3}\Sigma_{i=1}^n(x_i-\mu)^T(x_i-\mu) - \frac{n}{\sigma}
 	\label{eq:diff}
 \end{equation}
 and solving equation~\ref{eq:diff} for zero the maximum likelihood is gathered and described in equation~\ref{eq:ML}
 \begin{equation}
-	\sigma_{ML}^2 = \frac{1}{n}\Sigma_{i=1}^n(x_i-\mu)^2,
+	\sigma_{ML}^2 = \frac{1}{n}\Sigma_{i=1}^n(x_i-\mu)^T(x_i-\mu),
 	\label{eq:ML}
 \end{equation}
 
@@ -51,8 +51,8 @@ as the second derivative,
 
 \begin{equation}
 \begin{array}{rcl}
-\left.\frac{\delta^2 log(L)}{\delta\sigma^2}\right|_{\sigma^2=\sigma_{ML}^2} & = & -\frac{3}{\sigma^4_{ML}}\Sigma_{i=1}^{n}(x_i-\mu)^2+\frac{2n}{\sigma^2_{ML}}\\
-& = & -\frac{1}{\sigma^4_{ML}}\Sigma_{i=1}^{n}(x_i-\mu)^2 < 0,
+\left.\frac{\delta^2 log(L)}{\delta\sigma^2}\right|_{\sigma^2=\sigma_{ML}^2} & = & -\frac{3}{\sigma^4_{ML}}\Sigma_{i=1}^{n}(x_i-\mu)^T(x_i-\mu)+\frac{2n}{\sigma^2_{ML}}\\
+& = & -\frac{1}{\sigma^4_{ML}}\Sigma_{i=1}^{n}(x_i-\mu)^T(x_i-\mu) < 0,
 \end{array}
 \end{equation}
 
@@ -61,7 +61,10 @@ is negative at that point and the maximum is therefore found.
 \subsection*{1.2}
 
 \subsubsection*{a)}
+To derive the posterior distribution the probability distribution and the inverse-gamma prior distribution are multiplied. 
 
+$$ P(X =x|\sigma^2) P(\sigma^2=s|\alpha , \beta) = \frac{1}{2\pi \sigma^2} exp(-\frac{(x - \mu)^Tx-\mu}{2\sigma^2}) $$
+ 
 answer:
 \begin{equation}
 P(\sigma^2=s|\mu and stuff) \propto InverseGamma(\alpha+1, \beta + \sum(x-\mu)^{T}(x-\mu))
@@ -95,5 +98,16 @@ B_{Factor}=\frac{P(M_A|\sigma^2=\sigma_{ML}^2)}{P(M_B|\sigma^2=\sigma_{ML}^2)}
 \newpage 
 
 \section*{Problem 2}
+\subsection*{Problem 2.1}
+Figure~\ref{fig:prob21} shows the plotted data and how the data lies within the circles. Note that the data points within the circles almost correspond with 1,2 and 3 standard deviations, as should be expected from a normal distribution. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\textwidth]{Figures/plot2_1_scatter.png}
+	\caption{\label{fig:prob21}}
+\end{figure}
+
+\subsection*{Problem 2.2}
+
+
 
 \end{document}
