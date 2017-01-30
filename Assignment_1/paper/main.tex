@@ -58,9 +58,9 @@ is negative at that point and the maximum is therefore found.
 \subsubsection*{a)}
 To derive the posterior distribution the probability distribution and the inverse-gamma prior distribution are multiplied. 
 
-$$ P(X =x|\sigma^2) P(\sigma^2=s|\alpha , \beta) = \frac{1}{2\pi \sigma^2} exp(-\frac{(x - \mu)^Tx-\mu}{2\sigma^2})\cdot \frac{\beta^{\alpha}}{\Gamma(\alpha)}s^{-(\alpha+1)}exp(-\frac{\beta}{s}) $$
+$$ P(X =x|\sigma^2) P(\sigma^2=s|\alpha , \beta) = \frac{1}{2\pi \sigma^2} exp\Big(-\frac{(x - \mu)^T(x-\mu)}{2\sigma^2}\Big)\cdot \frac{\beta^{\alpha}}{\Gamma(\alpha)}s^{-(\alpha+1)}exp\Big(-\frac{\beta}{s}\Big) $$
 \noindent By simplifying and taking together terms the posterior distribution looks like
-$$p(\sigma^2 = s|x_1,...,x_n;\alpha,\beta) = stuff check Victor's notes $$
+$$p(\sigma^2 = s|x_1,...,x_n;\alpha,\beta) = \frac{1}{2\pi s}\frac{\beta^{\alpha}}{\Gamma({\alpha})}s^{-(\alpha + 1)}exp\Big(-\frac{1}{s}(\beta+\frac{(x-\mu)^T(x-\mu)}{2})\Big) $$
 \noindent which is recognized as a gamma function, so the posterior distribution becomes
 %answer:
 \begin{equation}
@@ -99,9 +99,9 @@ B_{Factor}=\frac{P(M_A|\sigma^2=\sigma_{ML}^2)}{P(M_B|\sigma^2=\sigma_{ML}^2)}
 Figure~\ref{fig:prob21} shows the plotted data and how the data lies within the circles. Note that the data points within the circles almost correspond with 1,2 and 3 standard deviations, as should be expected from a normal distribution. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.65\textwidth]{Figures/plot2_1_scatter.png}
-	\caption{\label{fig:prob21}The dataset plotted with three circles with radius $k\sigma$, where $k\in {1,2,3}$ and $\sigma$ is the standard deviation of the given data.}
+	\includegraphics[width=0.65\textwidth]{Figures/plot2_1_scatter.png}	\caption{\label{fig:prob21}The dataset plotted with three circles with radius $k\sigma$, where $k\in {1,2,3}$ and $\sigma$ is the standard deviation of the given data.}
 \end{figure}
+The code implementation can be found in the enclosed folder \verb|code|.
 
 \subsection*{Problem 2.2}
 
