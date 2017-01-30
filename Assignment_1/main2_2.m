@@ -17,7 +17,7 @@ load('dataset1.mat');
 [mu, sigma] = sge(x);
 
 prior_distribution = @(s,alpha,beta) beta.^alpha/gamma(alpha)*s.^(-alpha-1).*exp(-beta./s);
-posterior_distribution =@(s,alpha,beta) prior_distribution(s,alpha+1,beta+sigma^2);
+posterior_distribution =@(s,alpha,beta) prior_distribution(s,alpha+1,beta+1/2*sigma^2);
 
 
 x_axis_1 = 0:0.01:10;

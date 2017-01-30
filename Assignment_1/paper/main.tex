@@ -129,12 +129,45 @@ The code implementation can be found in the enclosed folder \verb|code|.
 \sigma^2_{MAP}=\frac{\beta+\sigma^2_{MLE}}{\alpha+2}
 \end{equation}
 
+
 where
+
+$\sigma^2_{MAP}$ derivation:
+
+\begin{equation}
+\sigma^2_{MAP}= \argmax_{\sigma^2=s}  p(s| x_1,...,x_n;\alpha,\beta)
+\end{equation}
+
+To find this we use the derivative
+
+\begin{equation}
+\begin{array}{rcl}
+\frac{\partial }{\partial s} Gam(s|a,b) & = & \frac{\partial}{\partial s} \frac{b^a}{\Gamma(a)}s^{-a-1}\exp{\left(-\frac{b}{s}\right)} \\
+& = & -\frac{b^as^{-a-3}e^{-\frac{b}{s}}(-b+as+s)}{\Gamma(a)}
+\end{array}
+\end{equation}
+
+and we want to check when this is zero,
+
+\begin{equation}
+\frac{\partial}{\partial s}Gam(s|a,b) = 0
+\end{equation}
+
+we have two uninteresting cases, i.e. $s=0$ and $s\rightarrow \inf$. The only non-trivial case is when,
+
+\begin{equation}
+-b+(a+1)s=0 \Rightarrow s = \frac{b}{a+1}.
+\end{equation}
+
+Using $b=\beta+\frac{1}{2}\sigma^2_{MLE}$ and $a = \alpha +1$ we get
+
+\begin{equation}
+\sigma^2_{MAP;\alpha,\beta} = \frac{\beta + \frac{1}{2}\sigma^2_{MLE}}{\alpha+2}
+\end{equation}
 
 \begin{equation}
 \sigma^2_{MLE}=\frac{1}{2}\left(x-\mu\right)^{T}\left(x-\mu\right)
 \end{equation}
-
 
 so we get,
 
@@ -144,6 +177,7 @@ so we get,
 \alpha=10, \beta = 1 \Rightarrow & \sigma^2_{MAP} & = & 0.1323
 \end{array}
 \end{equation}
+
 
 \begin{equation}
 B_{factor}=\frac{\sigma^2_{MAP;1}}{\sigma^2_{MAP;2}}=4
