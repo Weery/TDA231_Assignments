@@ -64,7 +64,7 @@ $$p(\sigma^2 = s|x_1,...,x_n;\alpha,\beta) = \frac{1}{2\pi s}\frac{\beta^{\alpha
 \noindent which is recognized as a gamma function, so the posterior distribution becomes
 %answer:
 \begin{equation}
-p(\sigma^2=s|x_1,...,x_n;\alpha,\beta) \propto InverseGamma(\alpha+1, \beta + \sum(x-\mu)^{T}(x-\mu))
+p(\sigma^2=s|x_1,...,x_n;\alpha,\beta) \propto InverseGamma(\alpha+1, \beta + \frac{1}{2}\sum(x-\mu)^{T}(x-\mu))
 \end{equation}
 
 \subsubsection*{b)}
@@ -84,6 +84,13 @@ so that
 B_{Factor} = \frac{P(M_A|D)P(M_B) }{P(M_B|D)P(M_A)}
 \end{equation}
 
+\begin{equation}
+	B_{Factor} = \frac{\int P(\sigma^2= s|M_A)P(\bar{x}|s,M_A) ds}{\int P(\sigma^2 = s|M_B)P(\bar{x}|s,M_B) ds}
+\end{equation}
+And by inserting the inverse gamma distribution from 1.2.a, the equation becomes
+\begin{equation}
+	B_{Factor} = \frac{\int Gam(\alpha_A+1,\beta_A \frac{1}{2}\sum(x-\mu)^T(x-\mu))ds}{\int Gam(\alpha_B+1,\beta_B \frac{1}{2}\sum(x-\mu)^T(x-\mu))ds}
+\end{equation}
 
 
 \subsubsection*{c)}
