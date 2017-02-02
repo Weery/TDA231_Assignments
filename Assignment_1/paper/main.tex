@@ -9,8 +9,6 @@
 
 \input{title.tex}
 
-
-
 \section*{Problem 1}
 \subsection*{1.1}
 
@@ -89,16 +87,64 @@ B_{Factor} = \frac{P(M_A|D)P(M_B) }{P(M_B|D)P(M_A)}
 \end{equation}
 And by inserting the inverse gamma distribution from 1.2.a, the equation becomes
 \begin{equation}
-	B_{Factor} = \frac{\int Gam(\alpha_A+1,\beta_A \frac{1}{2}\sum(x-\mu)^T(x-\mu))ds}{\int Gam(\alpha_B+1,\beta_B \frac{1}{2}\sum(x-\mu)^T(x-\mu))ds}
+	B_{Factor} = \frac{\int Gam(\alpha_A+1,\beta_A+ \frac{1}{2}\sum(x-\mu)^T(x-\mu))ds}{\int Gam(\alpha_B+1,\beta_B+ \frac{1}{2}\sum(x-\mu)^T(x-\mu))ds}
 \end{equation}
 
+and this expanded yields the following expression for the Bayes factor,
+
+\begin{equation}
+B_{Factor}=\frac{\left(\beta_A+ \frac{1}{2}\sum(x-\mu)^T(x-\mu)\right)^{\alpha_A+1}}{\left(\beta_B+ \frac{1}{2}\sum(x-\mu)^T(x-\mu)\right)^{\alpha_B+1}}\frac{\Gamma(\alpha_B+1)}{\Gamma(\alpha_A+1)}\frac{\int s^{-\alpha_A-2}exp\left(-\frac{\beta_A+ \frac{1}{2}\sum(x-\mu)^T(x-\mu)}{s}\right)ds}{\int s^{-\alpha_B-2}exp\left(-\frac{\beta_B+ \frac{1}{2}\sum(x-\mu)^T(x-\mu)}{s}\right)ds},
+\end{equation}
+
+which looks really tedious.
 
 \subsubsection*{c)}
 
+Using $P(\alpha_A,\beta_A)=P(\alpha_B,\beta_B) = 1/2$ we can write the Bayes factor as,
+ 
 \begin{equation}
-B_{Factor}=\frac{P(M_A|\sigma^2=\sigma_{ML}^2)}{P(M_B|\sigma^2=\sigma_{ML}^2)}
+B_{Factor}=\frac{\sigma^2_{MAP;\alpha_A\beta_A}}{\sigma^2_{MAP;\alpha_B\beta_B}},
 \end{equation}
 
+where,
+
+\begin{equation}
+\sigma^2_{MAP}= \argmax_{\sigma^2=s}  p(s| x_1,...,x_n;\alpha,\beta).
+\end{equation}
+
+To find this we use the derivative
+
+\begin{equation}
+\begin{array}{rcl}
+\frac{\partial }{\partial s} Gam(s|a,b) & = & \frac{\partial}{\partial s} \frac{b^a}{\Gamma(a)}s^{-a-1}\exp{\left(-\frac{b}{s}\right)} \\
+& = & -\frac{b^as^{-a-3}e^{-\frac{b}{s}}(-b+as+s)}{\Gamma(a)}
+\end{array}
+\end{equation}
+
+and we want to check when this is zero in order to get the maximum,
+
+\begin{equation}
+\frac{\partial}{\partial s}Gam(s|a,b) = 0
+\end{equation}
+
+we have two uninteresting cases, i.e. $s=0$ and $s\rightarrow \inf$. The only non-trivial case is when,
+
+\begin{equation}
+-b+(a+1)s=0 \Rightarrow s = \frac{b}{a+1}.
+\end{equation}
+
+Using $b=\beta+\frac{1}{2}\sigma^2_{MLE}$ and $a = \alpha +1$ we get
+
+\begin{equation}
+\sigma^2_{MAP;\alpha,\beta} = \frac{\beta + \frac{1}{2}\sigma^2_{MLE}}{\alpha+2}.
+\end{equation}
+
+so we get,
+
+\begin{equation}
+B_{factor} = \frac{\beta_A+\frac{1}{2}\sigma^2_{MLE}}{\alpha_A+2}\frac{\alpha_B+2}{\beta_B+\frac{1}{2}\sigma^2_{MLE}}
+\label{eq:BF_MAP}
+\end{equation}
 \newpage 
 
 \section*{Problem 2}
@@ -125,62 +171,20 @@ The code implementation can be found in the enclosed folder \verb|code|.
     \caption{\label{fig:distributions} The prior vs. posterior distribution using the given data for different hyperparameters $\alpha$ and $\beta$.}
 \end{figure}
 
-\begin{equation}
-\sigma^2_{MAP}=\frac{\beta+\sigma^2_{MLE}}{\alpha+2}
-\end{equation}
 
-
-where
-
-$\sigma^2_{MAP}$ derivation:
-
-\begin{equation}
-\sigma^2_{MAP}= \argmax_{\sigma^2=s}  p(s| x_1,...,x_n;\alpha,\beta)
-\end{equation}
-
-To find this we use the derivative
-
-\begin{equation}
-\begin{array}{rcl}
-\frac{\partial }{\partial s} Gam(s|a,b) & = & \frac{\partial}{\partial s} \frac{b^a}{\Gamma(a)}s^{-a-1}\exp{\left(-\frac{b}{s}\right)} \\
-& = & -\frac{b^as^{-a-3}e^{-\frac{b}{s}}(-b+as+s)}{\Gamma(a)}
-\end{array}
-\end{equation}
-
-and we want to check when this is zero,
-
-\begin{equation}
-\frac{\partial}{\partial s}Gam(s|a,b) = 0
-\end{equation}
-
-we have two uninteresting cases, i.e. $s=0$ and $s\rightarrow \inf$. The only non-trivial case is when,
-
-\begin{equation}
--b+(a+1)s=0 \Rightarrow s = \frac{b}{a+1}.
-\end{equation}
-
-Using $b=\beta+\frac{1}{2}\sigma^2_{MLE}$ and $a = \alpha +1$ we get
-
-\begin{equation}
-\sigma^2_{MAP;\alpha,\beta} = \frac{\beta + \frac{1}{2}\sigma^2_{MLE}}{\alpha+2}
-\end{equation}
-
-\begin{equation}
-\sigma^2_{MLE}=\frac{1}{2}\left(x-\mu\right)^{T}\left(x-\mu\right)
-\end{equation}
-
-so we get,
+Using equation~\eqref{eq:BF_MAP} we get,
 
 \begin{equation}
 \begin{array}{rrcl}
-\alpha=1, \beta = 1 \Rightarrow & \sigma^2_{MAP} & = & 0.5292\\
-\alpha=10, \beta = 1 \Rightarrow & \sigma^2_{MAP} & = & 0.1323
+\alpha=1, \beta = 1 \Rightarrow & \sigma^2_{MAP} & = & 0.3909\\
+\alpha=10, \beta = 1 \Rightarrow & \sigma^2_{MAP} & = &  0.0977
 \end{array}
 \end{equation}
 
+but since we have the same $\beta$ we can shorten the ratio to,
 
 \begin{equation}
-B_{factor}=\frac{\sigma^2_{MAP;1}}{\sigma^2_{MAP;2}}=4
+B_{factor}=\frac{\alpha_B+2}{\alpha_A+2} = \frac{10+2}{1+2} = 4,
 \end{equation}
 
 so we would prefer the model using $\alpha=1$ and $\beta=1$.

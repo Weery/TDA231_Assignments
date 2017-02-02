@@ -1,19 +1,108 @@
-\documentclass{article}
+\documentclass[table,xcdraw]{article}
 
 \input{settings.tex}
 
 
 
 \begin{document}
-\selectlanguage{swedish}
 
 \input{title.tex}
 
 
 
 \section*{Problem 1}
+\subsection*{1.1}
+
+\subsubsection*{a)}
+
+For this classification problem we want to calculate
+
+\begin{equation}
+P(c=k|(x_1,\dots,x_n)),
+\label{eq:probExpr}
+\end{equation}
+
+i.e. if we see the data $\bm{x}=(x_1,\dots,x_n)$ what is the probability that this feature vector belongs to class $k$. Here we only have binary feature vector, i.e. all elements are either $1$ or $0$. We want to estimate the probability $P(c=1|(0,1,1))$ given the previous results:
+
+\begin{equation*}
+	\begin{array}{rcl}
+		c & = & 1 : (1,1,1),(0,0,1),(1,1,0),(1,0,1) \\
+		c & = & 0 : (0,0,0),(1,0,0),(0,0,1),(0,1,0)
+	\end{array}
+\end{equation*}
+
+For this problem we assume that the features are internally conditionally independent, meaning that 
+
+\begin{equation}
+\label{eq:indeProb}
+P(x_i,x_j|c=k)=P(x_i|c=k)P(x_j|c=k)\;\forall\;(i,j)\in\{(a,b); a,b \in \mathbb{N},a\neq b, 0 < a \leq n ,0 < b \leq n \}.
+\end{equation}
+
+Using Bayes rule we can write the expression in \eqref{eq:probExpr} as
+
+\begin{equation}
+	\begin{array}{rcl}
+	P(c=k|(x_1,\dots,x_n)) & = & \displaystyle\frac{P(c=k)P((x_1,\dots,x_n)|c=k)}{\sum_{i=1}^{2}P(c=k_i)P((x_1,	\dots,x_n)|c=k_i)} \\[0.5cm]
+	& = & \displaystyle\frac{P(c=k)\prod_{j=1}^{n}P(x_j|c=k)}{\sum_{i=0}^{1}P(c=i)\prod_{j=1}^{n}P(x_j|c=i)}
+	\end{array}
+	\label{eq:bayes}
+\end{equation}
+
+and to calculate $P(c=1|(0,1,1))$ we need the conditional probabilites for the feature elements given the different classes, these values can be found in Table~\ref{tab:condProb}.
+
+\begin{table}[H]
+\centering
+\caption{Conditional probabilities given the class $k$, the probabilities that will be used in later calculations are marked in green and red.}
+\label{tab:condProb}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+            & \multicolumn{2}{c|}{i=1}                                                         & \multicolumn{2}{c|}{i=2}          & \multicolumn{2}{c|}{i=3}          \\ \hline
+x\_i       & 0                                                  & 1                           & 0                           & 1   & 0   & 1                           \\ \hline
+P(x\_i|c=1) &  \cellcolor[HTML]{67FD9A}1/4 & 3/4 & 1/2 & \cellcolor[HTML]{67FD9A}1/2 & 1/2 & \cellcolor[HTML]{67FD9A}1/2 \\ \hline
+P(x\_i|c=0) & \cellcolor[HTML]{FD6864}3/4                        & 1/4 & 3/4 & \cellcolor[HTML]{FD6864}1/4 & 3/4 & \cellcolor[HTML]{FD6864}1/4 \\ \hline
+\end{tabular}
+\end{table}
+
+Using also that $P(c=0)=P(c=1)=\frac{1}{2}$ we can finally calculate the probability,
+
+\begin{equation}
+	P(c=k|(0,1,1)) = \frac{\frac{1}{2}\frac{1}{4}\frac{1}{2}\frac{1}{2}}{\frac{1}{2}\frac{3}{4}\frac{1}{4}\frac{1}{4}+\frac{1}{2}\frac{1}{4}\frac{1}{2}\frac{1}{2}}= \frac{4}{7}.
+\end{equation}
+
+
+\subsubsection*{b)}
+
+Now we want to calculate the probability of being in class $c=1$ using only a subset of the possible features. To carry out this calculation we simply omit the unknown feature and use Bayes rule again to find the probability for $P(c=k|(0,1,\Colorcancel[red]{x}))$,
+
+\begin{equation}
+P(c=k|(0,1))=\frac{\frac{1}{2}\frac{1}{4}\frac{1}{2}}{\frac{1}{2}\frac{3}{4}\frac{1}{4}+\frac{1}{2}\frac{1}{4}\frac{1}{2}}=\frac{4}{5}
+\end{equation}
+
+
+where we again used the values from Table~\ref{tab:condProb}.
+
+
+
+\subsection*{1.2}
+
+The features $x_1,x_2 \text{and} x_3$ are not conditionally independent since only 1 of them are active at once, and thus the relation in \eqref{eq:indeProb} can not be used in Equation~\eqref{eq:bayes}. It would be easier to combine these three features to one, namely
+
+\[
+    x_1= 
+\begin{cases}
+    0, & \text{if customer is younger than 20.} \\
+    1, & \text{if customer is between 20 and 30 in age.}\\
+    2, & \text{if customer is older than 30.}
+\end{cases}
+\]
+
+So we only get a 2Dimensional feature vector, but not all the elements are a binary variable.
+ 
 \newpage 
 
 \section*{Problem 2}
+\subsection*{2.1}
+
+\subsection*{2.2}
 
 \end{document}

@@ -8,8 +8,6 @@
 \usepackage{units}
 \usepackage{float}
 \usepackage{icomma}
-\usepackage{color}
-\usepackage{graphicx}
 \usepackage{ gensymb }
 \usepackage{bbm}
 \usepackage{verbatim}
@@ -17,20 +15,15 @@
 \usepackage{caption}
 \usepackage{tikz}
 \usepackage{amssymb}
-\usepackage{hyperref}
-\usepackage{graphicx}
 \usepackage{braket}
 \usepackage{wrapfig}
 \usepackage[a4paper, total={6in, 9in}]{geometry}
 %\usepackage[parfill]{parskip}
 %\usepackage[table]{xcolor}
 %\usepackage[margin=1in]{geometry}
-\usepackage{tabularx}
-\usepackage{enumitem}
 \usepackage{microtype}
 \usepackage{eso-pic}
 \usepackage{subfigure}
-\usepackage{pgfplots} 
 \usetikzlibrary{backgrounds,automata}
 \newcommand{\backgroundpic}[3]{
 	\put(#1,#2){
@@ -41,7 +34,7 @@
 
 \usepackage[backend=biber,sortcites,sorting=none]{biblatex}
 \addbibresource{references.bib}
-\usepackage[swedish, english]{babel}
+\usepackage[swedish,english]{babel}
 \usepackage[babel]{csquotes}
 
 
@@ -52,13 +45,7 @@
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
-\setlist{nolistsep}
-\definecolor{green}{HTML}{66FF66}
-\definecolor{myGreen}{HTML}{009900}
-\usepackage{pdfpages}
+\usepackage{bm}
+\usepackage{cancel}
 
-\usepackage{scrextend}
-
-\usepackage{polynom}
-
-\setlength\parindent{0pt}
+\newcommand\Colorcancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
