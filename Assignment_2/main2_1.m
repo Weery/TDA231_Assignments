@@ -13,10 +13,16 @@
 clear all, close all, clc
 
 % a) see report
+load('dataset2.mat');
+class_idx1 = find(y==1);
+class_idx2 = find(y==-1);
+
+[mu1,sigma1] = sge(x(class_idx1,:));
+[mu2,sigma2] = sge(x(class_idx2,:));
 
 % b) see sph_bayes.m
 
 % c) see new_classifier.m
 
 % d) 
-load('dataset2.mat');
+

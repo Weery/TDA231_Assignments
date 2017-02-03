@@ -103,6 +103,26 @@ So we only get a 2Dimensional feature vector, but not all the elements are a bin
 \section*{Problem 2}
 \subsection*{2.1}
 
+Bayes classifier 
+
+\begin{equation}
+P(T_new=c|\bm{x}_{new},\bm{X},\bm{t})= \frac{p(\bm{x}_{new}|T_{new}=c,\bm{X},\bm{t})P(T_{new}=c|\bm{X},\bm{t})}{\sum_{c'=1}^{C}p(\bm{x}_{new}|T_{new}=c',\bm{X},\bm{t})P(T_{new}=c'|\bm{X},\bm{t})}
+\end{equation}
+
+The same prior distributions so that, 
+
+\begin{equation}
+P(T_{new}=c_i|\bm{X},\bm{t}) = P(T_{new}=c_j|\bm{X},\bm{t})\; \forall \; 0 < i,j \leq C
+\end{equation}
+
+and we can factor those out and cancel them.
+
+Then we use that we have spherical gaussians, such that,
+
+\begin{equation}
+p(\bm{x}_{new}|T_{new}=c,\bm{X},\bm{t}) = \frac{1}{\sqrt{(2\pi\sigma)^3}}exp{\left(-\frac{1}{2}(\bm{x}_{new}-\bm{\mu}_c)^{T}\sigma_c^2 \mathbb{I} (\bm{x}_{new}-\bm{\mu}_c) \right)}
+\end{equation}
+
 \subsection*{2.2}
 
 \end{document}
