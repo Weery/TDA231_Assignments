@@ -91,11 +91,4 @@ for i=1:5
     error(2,i) = sum(abs(estimated_class_new_classifier(:,1)-estimated_class_new_classifier(:,2))/2);
 end
 
-
 errors = sum(error,2)/length(error)/length(feature_vector_8)/2;
-
-
-% d)
-
-
-

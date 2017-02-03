@@ -106,7 +106,7 @@ So we only get a 2Dimensional feature vector, but not all the elements are a bin
 Bayes classifier 
 
 \begin{equation}
-P(T_new=c|\bm{x}_{new},\bm{X},\bm{t})= \frac{p(\bm{x}_{new}|T_{new}=c,\bm{X},\bm{t})P(T_{new}=c|\bm{X},\bm{t})}{\sum_{c'=1}^{C}p(\bm{x}_{new}|T_{new}=c',\bm{X},\bm{t})P(T_{new}=c'|\bm{X},\bm{t})}
+P(T_{new}=c|\bm{x}_{new},\bm{X},\bm{t})= \frac{p(\bm{x}_{new}|T_{new}=c,\bm{X},\bm{t})P(T_{new}=c|\bm{X},\bm{t})}{\sum_{c'=1}^{C}p(\bm{x}_{new}|T_{new}=c',\bm{X},\bm{t})P(T_{new}=c'|\bm{X},\bm{t})}
 \end{equation}
 
 The same prior distributions so that, 
@@ -120,9 +120,33 @@ and we can factor those out and cancel them.
 Then we use that we have spherical gaussians, such that,
 
 \begin{equation}
-p(\bm{x}_{new}|T_{new}=c,\bm{X},\bm{t}) = \frac{1}{\sqrt{(2\pi\sigma)^3}}exp{\left(-\frac{1}{2}(\bm{x}_{new}-\bm{\mu}_c)^{T}\sigma_c^2 \mathbb{I} (\bm{x}_{new}-\bm{\mu}_c) \right)}
+p(\bm{x}_{new}|T_{new}=c,\bm{X},\bm{t}) = \frac{1}{\sqrt{(2\pi\sigma_c^2)^3}}exp{\left(-\frac{1}{2}(\bm{x}_{new}-\bm{\mu}_c)^{T}\sigma_c^2 \mathbb{I} (\bm{x}_{new}-\bm{\mu}_c) \right)}
 \end{equation}
 
+\begin{table}[H]
+\centering
+\caption{The result of makeing 5-fold cross validation of the dataset. }
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+               & Group1 & Group 2 & Group 3 & Group 4 & Group 5 & Averaged Error \\ \hline
+SPH Classifier & 0.005  & 0.01    & 0.075   & 0.005   & 0.0025  & 0.012          \\ \hline
+New Classifier & 0.005  & 0.0125  & 0.075   & 0.005   & 0.0025  & 0.013          \\ \hline
+\end{tabular}
+\end{table}
+
 \subsection*{2.2}
+
+\begin{table}[H]
+\centering
+\caption{The result of making 5-fold crossvalidation for the digits 5 and 8 using the \texttt{$new\_classifier$} classifer for two different feature vectors, one using all the pixel values and the other the row and column variances.}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+                  & Group1 & Group 2 & Group 3 & Group 4 & Group 5 & Averaged Error \\ \hline
+Pixel Features    & 0.0977 & 0.1032  & 0.1027  & 0.1091  & 0.1086  & 0.1043         \\ \hline
+Variance Features & 0.0986 & 0.0986  & 0.0955  & 0.100   & 0.0968  & 0.0979         \\ \hline
+\end{tabular}
+\end{table}
 
 \end{document}
