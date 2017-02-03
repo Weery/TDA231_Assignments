@@ -18,6 +18,6 @@ sigma = 0;
 for i=1:N
     sigma=(x(i,:)-mu)'*(x(i,:)-mu)+sigma;
 end
-sigma = (sigma(1,1)+sigma(2,2)+sigma(3,3))/3;
+sigma = sum(diag(sigma))/length(sigma);
 sigma = sqrt(sigma/N);
 end
