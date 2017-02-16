@@ -79,8 +79,74 @@ where $\delta^j_k$ is the delta function.
 \frac{\partial E}{\partial w_{ij}} = \frac{\partial E}{\partial z_j} \frac{\partial z_j}{\partial w_{ij}} = \frac{\partial E}{\partial z_j} \frac{\partial}{\partial w_{ij}} w_{ij}y_i = \frac{\partial E}{\partial z_j} \delta^j_i y_i
 \end{equation}
 
+
 \section*{Problem 2}
 
+For the calculations below there are implicit summations over indices that are found twice (simplified Einstein notation), e.g.
+
+\begin{equation}
+a_i b_i = \sum_{i=1}^{I} a_i b_i
+\end{equation} 
+
+\subsection*{Derivative cross-entropy error gradient with respoect to softmax $\sigma_C(\bm{z})$}
+
+\begin{equation}
+E = -t_i \log{y_i}
+\end{equation}
+
+\begin{equation}
+\frac{\partial E}{\partial z_c} = -t_c \frac{\partial}{\partial z_c} \log {y_c} = -t_c\frac{\partial}{\partial z_c} \log{\sigma_c(\bm{z})} = -t_c \frac{\partial}{\partial z_c}\log{\frac{e^{z_c}}{\sum_{i}e^{z_i}}}
+\end{equation}
+
+\begin{equation}
+\frac{\partial}{\partial z_c} \frac{e^{z_c}}{\sum_{i}e^{z_i}} = \frac{\partial}{\partial z_c} \left(z_c-\log{\sum_i e^{z_i}}\right) = 1-\frac{\partial}{\partial z_c} \log{\left[e^{z_c}+\sum_{i\neq c}e^{z_i}\right]} = 1-\frac{e^{z_c}}{\sum_{i}e^{z_i}} = 1-\sigma_c{\bm{z}}
+\end{equation}
+
+\begin{equation}
+\frac{\partial E}{\partial z_c} = -t_c\left(1- \sigma_c(\bm{z}) \right) = \sigma_c(\bm{z})-t_c = y_c-t_c
+\end{equation}
+
+\subsection*{Derivative of Error function with respct to weight $w_{jk}$}
+
+\begin{equation}
+E = E^{Classification}+\alpha E^{weightdecay} = -\sum_{k}t_k\log{(\sigma_k{\bm{z}})} + \alpha \sum_j\sum_k ||w_{ij}||^2
+\end{equation}
+
+\begin{align*}
+	\frac{\partial E}{\partial w_{jk}} &= \frac{\partial E^{Classification}}{\partial w_{jk}}+\alpha \frac{\partial E^{weightdecay}}{\partial w_{jk}} = \frac{\partial E}{\partial z_k}\frac{\partial z_k}{\partial w_{jk}} + \alpha \frac{\partial}{\partial w_{jk}} ||w_{jk}||^2\\
+	&= \left(y_k-t_k\right)\delta^{k}_{j}y_j + \alpha 2w_{jk}
+\end{align*}
+
+
+
+
+\subsection*{Derivative of the logistic function $g(z)$}
+
+\begin{equation}
+g(z) = \frac{1}{1+e^{-z}}
+\end{equation}
+
+\begin{align}
+	\frac{\partial g(z)}{\partial z} &= \frac{\partial}{\partial z} \frac{1}{1+e^{-z}} = \frac{e^{-z}}{(1+e^{-z})^2} = \frac{1+e^{-z}}{(1+e^{-z})^2}-\frac{1}{(1+e^{-z})^2}= \frac{1}{1+e^{-z}}\left(1-\frac{1}{1+e^{-z}}\right)\\ &=g(z)(1-g(z))
+\end{align}
+
+\subsection*{Derivative of Error function with respect to weight $w_{ij}$}
+
+\begin{equation}
+\frac{\partial E}{\partial w{ij}} = \frac{\partial E^{Classification}}{\partial w_{ij}} + \alpha \frac{\partial E^{weightdecay}}{\partial w_{ij}}
+\end{equation}
+
+\begin{align*}
+	\frac{\partial E^{Classification}}{\partial w_{ij}} &= \frac{\partial E}{\partial z_k}\frac{\partial z_k}{\partial y_j}\frac{\partial y_j}{\partial z_j}\frac{\partial z_j}{\partial w_{ij}} = (y_k-t_k)w_{jk} g'(w_{ij}x_i) x_i \\&= (y_k-t_k)w_{jk}g(w_{ij}x_i)(1-g(w_{ij}x_i))x_i
+\end{align*}
+
+\begin{align*}
+	\frac{\partial E^{weightdecay}}{\partial w_{ij}} &= \frac{\partial}{\partial w_{ij}} ||w_{ij}||^2 \\&= 2\alpha w_{ij}
+\end{align*}
+
+\begin{equation}
+\frac{\partial E}{\partial w_{ij}} = (y_k-t_k)w_{jk} g'(w_{ij}x_i) x_i = (y_k-t_k)w_{jk}g(w_{ij}x_i)(1-g(w_{ij}x_i))x_i+2\alpha w_{ij}
+\end{equation}
 
 
 \end{document}

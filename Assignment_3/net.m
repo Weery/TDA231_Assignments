@@ -119,7 +119,9 @@ function res = grad(model, data, wd_coefficient)
   % data.inputs is a matrix of size <number of inputs i.e. 256> by <number of data cases>
   % data.targets is a matrix of size <number of classes i.e. 10> by <number of data cases>
 
-  % The returned object is supposed to be exactly like parameter <model>, i.e. it has fields res.input_to_hid and res.hid_to_class. However, the contents of those matrices are gradients (d cost by d model parameter), instead of model parameters.
+  % The returned object is supposed to be exactly like parameter <model>, i.e. 
+  %it has fields res.input_to_hid and res.hid_to_class. 
+  %However, the contents of those matrices are gradients (d cost by d model parameter), instead of model parameters.
 
 
   % Forward propagation
@@ -133,8 +135,11 @@ function res = grad(model, data, wd_coefficient)
   %% TODO - Write code here ---------------
 
     % Right now the function just returns a lot of zeros. Your job is to change that.
-    res.input_to_hid = model.input_to_hid * 0;
-    res.hid_to_class = model.hid_to_class * 0;
+%     res.input_to_hid = model.input_to_hid * 0;
+%     res.hid_to_class = model.hid_to_class * 0;
+    res.input_to_hid = model.input_to_hid * (-1./log_class_prob);
+    res.hid_to_class = model.hid_to_class * logistic(class_prob)*(1-logistic(class(prob)));
+
   % ---------------------------------------
 end
 
