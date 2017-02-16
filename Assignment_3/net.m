@@ -132,14 +132,31 @@ function res = grad(model, data, wd_coefficient)
   class_prob = exp(log_class_prob); 
   % class_prob is the model output.
   
-  %% TODO - Write code here ---------------
+%% TODO - Write code here ---------------
+    dataInputSize = size(data.inputs);
+    trainingSize = dataInputSize(2);
+    partial_E_to_zk = class_prob-data.targets;
+    partial_zk_to_wjk = hid_output'/trainingSize;
+    
+    partial_zk_to_yj = model.hid_to_class;
+    partial_yj_to_zj = hid_output.*(1-hid_output);
+    partial_zj_to_wij = data.inputs';
+    
+    partial_wjk_decay = wd_coefficient*model.hid_to_class;
+    partial_wij_decay = wd_coefficient*model.input_to_hid;
+    
+    partial_E_to_wjk = partial_E_to_zk * partial_zk_to_wjk;
 
+    partial_E_to_yj = partial_E_to_zk' * partial_zk_to_yj;
+    partial_E_to_zj = partial_E_to_yj'.* partial_yj_to_zj;
+    
+    %partial_E_to_wij = partial_E_to_zk' * partial_zk_to_yj * partial_yj_to_zj * ...
+    %    partial_zj_to_wij;
+    
+    partial_yj_to_wij = partial_E_to_zj * partial_zj_to_wij/trainingSize;
     % Right now the function just returns a lot of zeros. Your job is to change that.
-%     res.input_to_hid = model.input_to_hid * 0;
-%     res.hid_to_class = model.hid_to_class * 0;
-    res.input_to_hid = model.input_to_hid * (-1./log_class_prob);
-    res.hid_to_class = model.hid_to_class * logistic(class_prob)*(1-logistic(class(prob)));
-
+    res.input_to_hid = partial_wij_decay+partial_yj_to_wij;
+    res.hid_to_class = partial_wjk_decay+partial_E_to_wjk;
   % ---------------------------------------
 end
 
