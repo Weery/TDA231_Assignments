@@ -19,6 +19,68 @@ Neural network nr.1 can be trained using backpropagation. The input vector is pr
 \subsection*{1.1b}
 In general an activation function in a neuron must be differentiable to use the backpropagation. It must be propagated through the network layer by layer until it reaches the output layer.
 
+\subsection*{1.2}
+The output has a linear activation function,
+
+\begin{equation}
+y = g(\bm{w}^T\bm{x}) = c \bm{w}^T \bm{x}.
+\end{equation}
+
+Combining two networks will then yield a new network of the same 
+topology. 
+
+\begin{align*}
+	y & =g(\frac{1}{2} \bm{w}_1^T \bm{x}+\frac{1}{2} \bm{w}_2^{T} \bm{x}) = \text{As } g \text{ is linear} = \frac{1}{2}g(\bm{w}_1^T \bm{x})+\frac{1}{2}g(\bm{w}_2^T \bm{x}) = \frac{c}{2}\bm{w}_1^T\bm{x}+\frac{c}{2}\bm{w}_2^T\bm{x} \\ & = \frac{c}{2}(\bm{w}_1^T+\bm{w}_2^T)\bm{x} = c \bm{w}_3^T \bm{x} = g(\bm{w}_3^T\bm{x}).
+\end{align*}
+
+So combining these two networks will give us a new network with weights, $\bm{w}_3^T=\frac{1}{2}(\bm{w}_1^T+\bm{w}_2^T)$.
+
+
+\subsection*{1.3}
+
+Equation~\eqref{eq:step} shows how the weights are readjusted with the learning rate. 
+\begin{equation}
+\omega_i = \omega_{i-1} - \lambda\bigtriangledown E_n(\omega_i)
+\label{eq:step}
+\end{equation}
+Knowing that the error is $E=\frac{1}{2}(t-y)^2$ the gradient of this error function is shown in equation~\eqref{eq:grad}
+\begin{equation}
+	\frac{\delta E_n}{\delta \omega_{ji}} = (t_{nj} - y_{nj})x_{ni} \rightarrow \bigtriangledown E_n(\textbf{w}) = (t - \textbf{w}^T\textbf{x})\textbf{x}
+	\label{eq:grad}
+\end{equation}
+By combining equations~\eqref{eq:step} and~\eqref{eq:grad} we see that the term added to the readjusted weights from the algorithm are
+\begin{equation*}
+	-\lambda(t - \textbf{w}^T\textbf{x})\textbf{x}
+	\label{eq:addterm}
+\end{equation*}
+
+\subsection*{1.4}
+
+\begin{equation}
+\frac{\partial E}{\partial z_k} = \frac{\partial E}{\partial y_k} \frac{\partial y_k}{\partial z_k} = \frac{\partial E}{\partial y_k} g'(z_k)
+\end{equation}
+
+\begin{equation}
+\frac{\partial E}{\partial y_j} = \frac{\partial E}{\partial z_k} \frac{\partial z_k}{\partial y_j} =
+\frac{\partial E}{\partial z_k} \frac{\partial}{\partial y_j} w_{jk} y_j =\frac{\partial E}{\partial z_k} w_{jk}
+\end{equation}
+
+\begin{equation}
+\frac{\partial E}{\partial z_j} = \frac{\partial E}{\partial y_j} \frac{\partial y_j}{\partial z_j} = \frac{\partial E}{\partial y_k} g'(z_k) w_{jk} \frac{\partial y_j}{\partial z_j} = \frac{\partial E}{\partial y_k} g'(z_k) w_{jk} g'(z_j)
+\end{equation}
+
+\begin{equation}
+\frac{\partial E}{\partial w_{jk}} = \frac{\partial E}{\partial z_k} \frac{\partial z_k}{\partial w_{jk}} = \frac{\partial E}{\partial y_k} g'(z_k) \frac{\partial}{\partial w_{jk}} w_{jk}y_{j} = \frac{\partial E}{\partial y_k} g'(z_k) \delta^j_k y_j,
+\end{equation}
+
+where $\delta^j_k$ is the delta function.
+
+\begin{equation}
+\frac{\partial E}{\partial w_{ij}} = \frac{\partial E}{\partial z_j} \frac{\partial z_j}{\partial w_{ij}} = \frac{\partial E}{\partial z_j} \frac{\partial}{\partial w_{ij}} w_{ij}y_i = \frac{\partial E}{\partial z_j} \delta^j_i y_i
+\end{equation}
+
 \section*{Problem 2}
+
+
 
 \end{document}
